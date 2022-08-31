@@ -69,7 +69,8 @@ final class Ultimate_Member_Custom_Messages
      */
     public function includes()
     {
-        include_once 'includes/class-worker.php';
+        include_once 'includes/class-submit-form-errors-login.php';
+        include_once 'includes/class-submit-form-errors.php';
         include_once 'includes/functions.php';
     }
 

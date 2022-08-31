@@ -2,12 +2,18 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-if (!class_exists('Ultimate_Member_Custom_Messages_Worker')):
-    class Ultimate_Member_Custom_Messages_Worker
+if (!class_exists('Ultimate_Member_Submit_Form_Errors')):
+    class Ultimate_Member_Submit_Form_Errors
     {
         public function __construct()
         {
-            add_action('um_submit_form_errors_hook_', [$this, 'um_submit_form_errors_hook_'], 999);
+            add_action('plugins_loaded', [$this, 'hooks']);
+        }
+
+        function hooks()
+        {
+            remove_action('um_submit_form_errors_hook_', 'um_submit_form_errors_hook_');
+            add_action('um_submit_form_errors_hook_', [$this, 'um_submit_form_errors_hook_'], 10);
         }
 
         function um_submit_form_errors_hook_($args)
@@ -516,5 +522,5 @@ if (!class_exists('Ultimate_Member_Custom_Messages_Worker')):
 
     }
 
-    return new Ultimate_Member_Custom_Messages_Worker();
+    return new Ultimate_Member_Submit_Form_Errors();
 endif;
